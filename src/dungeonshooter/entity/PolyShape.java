@@ -81,7 +81,6 @@ public class PolyShape implements Entity{
 			points[1][j] =nums[i+1];   
 
 		}
-		hitbox = new HitBox();
 		hitbox.setBounds(minX, minY, maxX-minX, maxY-minY);
 
 		return this;
@@ -142,10 +141,7 @@ public class PolyShape implements Entity{
 
 	@Override
 	public boolean hasHitbox() {
-		if (getHitBox()!=null)
 			return true;
-		else
-		return false;
 	}
 
 	@Override
@@ -156,10 +152,7 @@ public class PolyShape implements Entity{
 
 	@Override
 	public boolean isDrawable() {
-		if(getHitBox()!=null)
-			return true;
-		else
-		return false;
+		return true;
 	}
 
 	@Override

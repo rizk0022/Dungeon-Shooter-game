@@ -1,9 +1,6 @@
 package dungeonshooter.animator;
 
-import java.util.List;
 import java.util.function.Consumer;
-
-
 import dungeonshooter.CanvasMap;
 import dungeonshooter.entity.Entity;
 import dungeonshooter.entity.FpsCounter;
@@ -12,13 +9,11 @@ import javafx.animation.AnimationTimer;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
-import utility.Point;
-
 public abstract class AbstractAnimator extends AnimationTimer{
 
 	protected CanvasMap map;
 	private FpsCounter fps;
-	
+
 
 	public AbstractAnimator(){
 		map = new CanvasMap();
@@ -50,24 +45,24 @@ public abstract class AbstractAnimator extends AnimationTimer{
 		if(map.getDrawBounds() )
 		{
 
-			 for(PolyShape shape: map.staticShapes())
-			 {
+			for(PolyShape shape: map.staticShapes())
+			{
 
-				 if(map.getDrawBounds())
-				 {
-					 shape.getHitBox().getBound();
-				 }
-				 if(map.getDrawFPS())
-				 {
-					 fps.getDrawable().draw(gc);;
-				 }
-			 }
+				if(map.getDrawBounds())
+				{
+					shape.getHitBox().getBound();
+				}
+				if(map.getDrawFPS())
+				{
+					fps.getDrawable().draw(gc);;
+				}
+			}
 
 		}
 	}
 
 	abstract void handle( long now, GraphicsContext gc);
-	
+
 	public void drawEntities(GraphicsContext gc) { 
 		Consumer<Entity> draw = new Consumer<Entity>() {
 
@@ -77,8 +72,7 @@ public abstract class AbstractAnimator extends AnimationTimer{
 				{
 					e.getDrawable().draw(gc); 
 
-					if(map.getDrawBounds()) 
-					{
+					if(map.getDrawBounds()) 	{
 						e.getHitBox().getDrawable().draw(gc);
 					}
 
@@ -87,10 +81,10 @@ public abstract class AbstractAnimator extends AnimationTimer{
 			}
 		};
 
-		
+
 		draw.accept(map.getMapShape());
 
-		
+
 		for(Entity e: map.staticShapes()) 
 		{
 			draw.accept(e);

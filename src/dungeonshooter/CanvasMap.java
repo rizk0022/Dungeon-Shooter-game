@@ -4,27 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dungeonshooter.animator.AbstractAnimator;
-import dungeonshooter.animator.Animator;
 import dungeonshooter.entity.Bullet;
 import dungeonshooter.entity.Entity;
 import dungeonshooter.entity.PolyShape;
-import dungeonshooter.entity.property.Drawable;
 import dungeonshooter.entity.property.HitBox;
 import javafx.animation.AnimationTimer;
 import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.event.Event;
-import javafx.event.EventHandler;
-import javafx.event.EventType;
-import javafx.scene.Node;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 
 
@@ -84,8 +73,8 @@ public class CanvasMap
 				w(), h(), 0, h());
 		return this;
 	}
-	
-	
+
+
 
 	public PolyShape getMapShape()
 	{
@@ -95,11 +84,11 @@ public class CanvasMap
 
 	public void addSampleShapes()
 	{
-		PolyShape p1 = new PolyShape().randomize(500, 500, 120, 3, 10);
-		PolyShape p2 = new PolyShape().randomize(150, 500, 120, 3, 10);
-		PolyShape p3 = new PolyShape().randomize(150, 150, 120, 3, 10);
-		PolyShape p4 = new PolyShape().randomize(500, 150, 120, 3, 10);
-		
+		PolyShape p1 = new PolyShape().randomize(500, 500, 120, 6, 10);
+		PolyShape p2 = new PolyShape().randomize(150, 500, 120, 6, 10);
+		PolyShape p3 = new PolyShape().randomize(150, 150, 120, 6, 10);
+		PolyShape p4 = new PolyShape().randomize(500, 150, 120, 6, 10);
+
 		staticShapes.add(p1);
 		staticShapes.add(p2);
 		staticShapes.add(p3);
@@ -129,18 +118,10 @@ public class CanvasMap
 	{
 		if( animator != null){
 			stop();
-			//removeMouseEvents();
 		}
 		animator = newAnimator;
-		//registerMouseEvents();
-		start();
 		return this;
 	}
-
-
-
-
-
 
 	/**
 	 * create a method called start.
@@ -183,6 +164,7 @@ public class CanvasMap
 	public void fireBullet(Bullet bullet ) 
 	{
 		buffer.add(bullet);
+		updateProjectilesList();
 	} 
 
 	public void updateProjectilesList() 
@@ -193,11 +175,7 @@ public class CanvasMap
 
 	public boolean inMap(HitBox hitbox) 
 	{
-		if(hitbox.getDrawable() != border.getDrawable()) 
-		{
-			return false;
-		}
-		return true;
+		return border.getHitBox().containsBounds(hitbox);
 	}
 
 

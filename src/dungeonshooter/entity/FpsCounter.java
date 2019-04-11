@@ -4,7 +4,6 @@ import dungeonshooter.entity.property.Drawable;
 import dungeonshooter.entity.property.HitBox;
 import dungeonshooter.entity.property.Sprite;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -24,6 +23,8 @@ public class FpsCounter implements Entity {
 	private Paint fill;
 	private Paint stroke;
 	private double strokeWidth;
+	private HitBox hitbox;
+	private Point pos;
 
 	public FpsCounter(double x, double y) {
 		sprite = new Sprite() {
@@ -39,8 +40,6 @@ public class FpsCounter implements Entity {
 				gc.setLineWidth(getWidth());
 				gc.strokeText(fpsDisplay, x, y);
 				gc.setFont(temp);
-
-
 			}
 
 		};
@@ -98,7 +97,7 @@ public class FpsCounter implements Entity {
 	@Override
 	public HitBox getHitBox() {
 		// TODO Auto-generated method stub
-		return null;
+		return hitbox;
 	}
 
 }
